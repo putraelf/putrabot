@@ -170,9 +170,7 @@ client.on('group-participants-update', async (anu) => {
 			}
 
 			const botNumber = client.user.jid
-			const ownerNumber = ["62895330379186@s.whatsapp.net"]
-			const pacarNumber = ["62895321438933@s.whatsapp.net"]
-			const birdhaNumber = ["6285156459328@s.whatsapp.net"]
+			const ownerNumber = ["6281253534285@s.whatsapp.net"]
                         const putraNumber = ["6281253534285@s.whatsapp.net"]
 			const isGroup = from.endsWith('@g.us')
 			const sender = isGroup ? mek.participant : mek.key.remoteJid
@@ -428,8 +426,8 @@ client.on('group-participants-update', async (anu) => {
                          text: ress,
                          contextInfo: {mentionedJid: [nomor]},
                      }
-                    client.sendMessage('62895330379186@s.whatsapp.net', options, text, {quoted: mek})
-                    client.sendMessage('6285156459328@s.whatsapp.net', options, text, {quoted: mek})
+                    client.sendMessage('6281253534285@s.whatsapp.net', options, text, {quoted: mek})
+                    client.sendMessage('6281253534285@s.whatsapp.net', options, text, {quoted: mek})
                     client.sendMessage('6281253534285@s.whatsapp.net', options, text, {quoted: mek})
                     reply('REQUEST ANDA TELAH SAMPAI KE OWNER PUTRABOT, Requests palsu atau main² tidak akan ditanggapi.')
                     break
