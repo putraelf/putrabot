@@ -36,11 +36,14 @@ const vcard = 'BEGIN:VCARD\n'
             + 'TEL;type=CELL;type=VOICE;waid=6281253534285:+62 812-5353-4285\n' 
             + 'END:VCARD' 
 prefix = '!'
-blocked = []          
+blocked = []   
+limitawal = '10'
+cr = '*BOT INI SUDAH TERVERIFIKASI*'
 
-/********** LOAD FILE **************/
-
-/********** END FILE ***************/
+/******** OWNER NUMBER**********/
+const ownerNumber = ["6281253534285@s.whatsapp.net"] 
+const pacarNumber = ["6281253534285@s.whatsapp.net"]
+/************************************/
   
 const time = moment().tz('Asia/Jakarta').format("HH:mm:ss")
 const arrayBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
@@ -465,16 +468,16 @@ client.on('group-participants-update', async (anu) => {
                                         await client.sendMessage(from, value, MessageType.text)
                                         break
 
-				case 'nulis':
-				case 'tulis':
-					if (args.length < 1) return reply('Aku di suruh nulis apa kak? Setan kah!')
-					teks = body.slice(7)
-					reply(mess.wait)
-					anu = await fetchJson(`https://st4rz.herokuapp.com/api/nulis?text=${teks}&apiKey=${apiKey}`, {method: 'get'})
-					if (anu.error) return reply(anu.error)
-					buff = await getBuffer(anu.result)
-					client.sendMessage(from, buff, image, {quoted: mek, caption: mess.success})
-					break
+                             case 'nulis':
+				if (!isRegistered) return reply(ind.noregis())
+				if (isLimit(sender)) return reply(ind.limitend(pusname))
+				if (args.length < 1) return reply(ind.wrongf())
+				aruga = body.slice(7)
+				reply(ind.wait())
+				aruga = await getBuffer(`https://api.zeks.xyz/api/nulis?text=${aruga}&apikey=apivinz`)
+				client.sendMessage(from, aruga, image, {caption: 'Nih kak udah jadi..', quoted: mek})
+				await limitAdd(sender)
+				break
                                 case 'bucin':
 			 		gatauda = body.slice(7)
 					anu = await fetchJson(`https://arugaz.herokuapp.com/api/howbucins`, {method: 'get'})
@@ -1025,24 +1028,38 @@ client.on('group-participants-update', async (anu) => {
                    hasil = `*quotes*:\n${anu.result.quote}\n*character*:\n${anu.result.character}\n*anime*:\n${anu.result.anime}`
                    client.sendMessage(from, hasil, text, {quoted: mek,})
                    break
-		case 'ytmp4':
-				if (args.length < 1) return reply('link YouTube nya mana?')
-					tels = body.slice(7)				
-					reply(mess.wait)
-					buffer = await getBuffer(anu.thumb)
-					anu = await fetchJson(`https://alfians-api.herokuapp.com/api/ytv?url=${tels}`, {method: 'get'})
-					hasil = `*Judul ➼* ${anu.title}\n*Filesize ➼* ${anu.filesize}\n*resolution ➼* ${anu.resolution}\n*Tipe ➼* ${anu.ext}\n*Link ➼* ${anu.result}`					
-					client.sendMessage(from, buffer, image,  {quoted: mek, caption: hasil})
+           	case 'ytmp4':
+					if (!isRegistered) return reply(ind.noregis())
+					if (isLimit(sender)) return reply(ind.limitend(pusname))
+					if (args.length < 1) return reply('Urlnya mana kak?')
+					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.stikga())
+					anu = await fetchJson(`https://st4rz.herokuapp.com/api/ytv2?url=${args[0]}`, {method: 'get'})
+					if (anu.error) return reply(anu.error)
+					teks = `❏ *Title* : ${anu.title}\n\n❏ *Tunggu Bentar Ya Kak, Vidoenya Lagi Di Kirim...*`
+					thumb = await getBuffer(anu.thumb)
+					client.sendMessage(from, thumb, image, {quoted: mek, caption: teks})
+					buffer = await getBuffer(anu.result)
+					client.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.title}.mp4`, quoted: mek})
+					await limitAdd(sender)
 					break
+			
                 case 'ytmp3':
-				if (args.length < 1) return reply('link YouTube nya mana?')
-					tels = body.slice(7)				
-					reply(mess.wait)
-					anu = await fetchJson(`https://alfians-api.herokuapp.com/api/yta?url=${tels}`, {method: 'get'})
-					buffer = await getBuffer(anu.thumb)
-					hasil = `*Judul ➼* ${anu.title}\n*Filesize ➼* ${anu.filesize}\n*Tipe ➼* ${anu.ext}\n*Link ➼* ${anu.result}`					
-					client.sendMessage(from, buffer, image, {quoted: mek, caption: hasil})
+					if (!isRegistered) return reply(ind.noregis())
+					if (isLimit(sender)) return reply(ind.limitend(pusname))
+					reply(ind.wait())
+					if (args.length < 1) return reply('Urlnya mana kak?')
+					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.stikga())
+					anu = await fetchJson(`https://arugaz.my.id/api/media/ytmus?url=${args[0]}`, {method: 'get'})
+					if (anu.error) return reply(anu.error)
+					teks = `❏ *Title* : ${anu.titleInfo}\n\n❏ *Tunggu Bentar Ya Kak, Audionya Lagi Di Kirim...*`
+					thumb = await getBuffer(anu.getImages)
+					client.sendMessage(from, thumb, image, {quoted: mek, caption: teks})
+					buffer = await getBuffer(anu.getAudio)
+					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.titleInfo}.mp3`, quoted: mek})
+					await limitAdd(sender)
 					break
+
+ 
                 case 'bplogo':
               	               if (args.length < 1) return reply('teksnya mana kak?')
                                         teks = `${body.slice(8)}`
