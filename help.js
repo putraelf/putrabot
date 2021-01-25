@@ -18,6 +18,7 @@ const help = (prefix) => {
 ┣⊱ *${prefix}text3d*
 ┣⊱ *${prefix}glitch* ❌
 ┣⊱ *${prefix}wolflogo* ❌
+┣⊱ *${prefix}nulis*
 ┣━━❀ *Random Picture Meme* ❀━━
 ┣⊱ *${prefix}meme*
 ┣⊱ *${prefix}memeindo*
@@ -132,8 +133,20 @@ const help = (prefix) => {
 ┣⊱ *${prefix}setpp*
 ┣⊱ *${prefix}setprefix*
 ┣━━━━━━━━━━━━━━
-┃*POWERED BY AINEBOT*
+┃*POWERED BY PUTRABOT*
 ┗━━━━━━━━━━━━━━
+╔══✪〘 DONATE 〙✪══
+║
+╠➥ *DONASI BISA*:081253534285
+╠➥ *DANA/PULSA/*:081253534285
+╠➥ *PAYPAL*:081253534285
+╠➥ *SAWERIA :*
+╠➥ *TERIMA KASIH *
+║
+╚═〘 *PUTRABOT* 〙
+╠═══════════════════════════
+
+
 `
 }
 exports.help = help
