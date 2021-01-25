@@ -215,18 +215,24 @@ client.on('group-participants-update', async (anu) => {
 			if (!isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECV\x1b[1;37m]', time, color('Message'), 'from', color(sender.split('@')[0]), 'in', color(groupName), 'args :', color(args.length))
 			switch(command) {
 				case 'bisakah':
+                                        if (!isRegistered) return reply(ind.noregis())
+				        if (isLimit(sender)) return reply(ind.limitend(pusname))
 					bisakah = body.slice(1)
 					const bisa =['Bisa','Tidak Bisa','Coba Ulangi']
 					const keh = bisa[Math.floor(Math.random() * bisa.length)]
 					client.sendMessage(from, 'Pertanyaan : *'+bisakah+'*\n\nJawaban : '+ keh, text, { quoted: mek })
 					break
 				case 'kapankah':
+                                        if (!isRegistered) return reply(ind.noregis())
+				        if (isLimit(sender)) return reply(ind.limitend(pusname))
 					kapankah = body.slice(1)
 					const kapan =['Besok','Lusa','Tadi','4 Hari Lagi','5 Hari Lagi','6 Hari Lagi','1 Minggu Lagi','2 Minggu Lagi','3 Minggu Lagi','1 Bulan Lagi','2 Bulan Lagi','3 Bulan Lagi','4 Bulan Lagi','5 Bulan Lagi','6 Bulan Lagi','1 Tahun Lagi','2 Tahun Lagi','3 Tahun Lagi','4 Tahun Lagi','5 Tahun Lagi','6 Tahun Lagi','1 Abad lagi','3 Hari Lagi']
 					const koh = kapan[Math.floor(Math.random() * kapan.length)]
 					client.sendMessage(from, 'Pertanyaan : *'+kapankah+'*\n\nJawaban : '+ koh, text, { quoted: mek })
 					break
                                 case 'apakah':
+                                        if (!isRegistered) return reply(ind.noregis())
+				        if (isLimit(sender)) return reply(ind.limitend(pusname)) 
 					apakah = body.slice(1)
 					const apa =['Iya','Tidak','Bisa Jadi','Coba Ulangi']
 					const kah = apa[Math.floor(Math.random() * apa.length)]
@@ -539,11 +545,15 @@ client.on('group-participants-update', async (anu) => {
 			                client.sendMessage(from, anu, text, {quoted: mek, caption: hasil})
 			                break
 				case 'cerpen':
+                                        if (!isRegistered) return reply(ind.noregis())
+				        if (isLimit(sender)) return reply(ind.limitend(pusname)) 
 					gatauda = body.slice(8)
 					anu = await fetchJson(`https://arugaz.herokuapp.com/api/cerpen`, {method: 'get'})
 					reply(anu.result.result)
 					break
 				case 'chord':
+                                        if (!isRegistered) return reply(ind.noregis())
+				        if (isLimit(sender)) return reply(ind.limitend(pusname))
 					if (args.length < 1) return reply('teks nya mana kak?')
 					tels = body.slice(7)
 					anu = await fetchJson(`https://arugaz.herokuapp.com/api/chord?q=${tels}`, {method: 'get'})
