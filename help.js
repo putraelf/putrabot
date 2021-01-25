@@ -135,7 +135,7 @@ const help = (prefix) => {
 ┣━━━━━━━━━━━━━━
 ┃*POWERED BY PUTRABOT*
 ┗━━━━━━━━━━━━━━
-╔══✪〘 DONATE 〙✪══
+╔══✪〘 DONATE 〙✪══════════
 ║
 ╠➥ *DONASI BISA*:081253534285
 ╠➥ *DANA/PULSA/*:081253534285
