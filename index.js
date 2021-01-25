@@ -37,7 +37,6 @@ const vcard = 'BEGIN:VCARD\n'
             + 'END:VCARD' 
 prefix = '!'
 blocked = []   
-limitawal = '10'
 cr = '*BOT INI SUDAH TERVERIFIKASI*'
 
 /******** OWNER NUMBER**********/
@@ -171,7 +170,6 @@ client.on('group-participants-update', async (anu) => {
 
 			const botNumber = client.user.jid
 			const ownerNumber = ["6281253534285@s.whatsapp.net"]
-                        const putraNumber = ["6281253534285@s.whatsapp.net"]
 			const isGroup = from.endsWith('@g.us')
 			const sender = isGroup ? mek.participant : mek.key.remoteJid
 			const groupMetadata = isGroup ? await client.groupMetadata(from) : ''
@@ -186,10 +184,7 @@ client.on('group-participants-update', async (anu) => {
 			const isNsfw = isGroup ? nsfw.includes(from) : false
 			const isSimi = isGroup ? samih.includes(from) : false
 			const isOwner = ownerNumber.includes(sender)
-			const isPacar = pacarNumber.includes(sender)
-			const isBirdha = birdhaNumber.includes(sender)
-                        const isPutra = putraNumber.includes(sender)
-			const isUrl = (url) => {
+	                const isUrl = (url) => {
 			    return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
 			}
 			const reply = (teks) => {
@@ -222,16 +217,14 @@ client.on('group-participants-update', async (anu) => {
 					break
 				case 'kapankah':
                                         if (!isRegistered) return reply(ind.noregis())
-				        if (isLimit(sender)) return reply(ind.limitend(pusname))
-					kapankah = body.slice(1)
+                                        kapankah = body.slice(1)
 					const kapan =['Besok','Lusa','Tadi','4 Hari Lagi','5 Hari Lagi','6 Hari Lagi','1 Minggu Lagi','2 Minggu Lagi','3 Minggu Lagi','1 Bulan Lagi','2 Bulan Lagi','3 Bulan Lagi','4 Bulan Lagi','5 Bulan Lagi','6 Bulan Lagi','1 Tahun Lagi','2 Tahun Lagi','3 Tahun Lagi','4 Tahun Lagi','5 Tahun Lagi','6 Tahun Lagi','1 Abad lagi','3 Hari Lagi']
 					const koh = kapan[Math.floor(Math.random() * kapan.length)]
 					client.sendMessage(from, 'Pertanyaan : *'+kapankah+'*\n\nJawaban : '+ koh, text, { quoted: mek })
 					break
                                 case 'apakah':
                                         if (!isRegistered) return reply(ind.noregis())
-				        if (isLimit(sender)) return reply(ind.limitend(pusname)) 
-					apakah = body.slice(1)
+				        apakah = body.slice(1)
 					const apa =['Iya','Tidak','Bisa Jadi','Coba Ulangi']
 					const kah = apa[Math.floor(Math.random() * apa.length)]
 					client.sendMessage(from, 'Pertanyaan : *'+apakah+'*\n\nJawaban : '+ kah, text, { quoted: mek })
@@ -329,8 +322,7 @@ client.on('group-participants-update', async (anu) => {
 					break
 		case 'quotemaker':
                                        	if (!isRegistered) return reply(ind.noregis())
-					if (isLimit(sender)) return reply(ind.limitend(pusname))
-					var gh = body.slice(12)
+				        var gh = body.slice(12)
 					var quote = gh.split("|")[0];
 					var wm = gh.split("|")[1];
 					var bg = gh.split("|")[2];
@@ -343,7 +335,6 @@ client.on('group-participants-update', async (anu) => {
 					break
                  case 'phlogo':
                                 	if (!isRegistered) return reply(ind.noregis())
-					if (isLimit(sender)) return reply(ind.limitend(pusname))
 					var gh = body.slice(9)
 					var gbl1 = gh.split("|")[0];
 					var gbl2 = gh.split("|")[1];
@@ -355,8 +346,7 @@ client.on('group-participants-update', async (anu) => {
 					break
                 case 'ninjalogo':
  		     if (!isRegistered) return reply(ind.noregis())
-		     if (isLimit(sender)) return reply(ind.limitend(pusname))
-                      if (args.length < 1) return reply('Teks nya mana?')
+		      if (args.length < 1) return reply('Teks nya mana?')
                       gh = body.slice(11)
                       gl1 = gh.split("|")[0];
                       gl2 = gh.split("|")[1];
@@ -367,8 +357,7 @@ client.on('group-participants-update', async (anu) => {
                       break
                 case 'lionlogo':
 		     if (!isRegistered) return reply(ind.noregis())
-		      if (isLimit(sender)) return reply(ind.limitend(pusname))
-                      if (args.length < 1) return reply('Teks nya mana?')
+	              if (args.length < 1) return reply('Teks nya mana?')
                       gh = body.slice(10)
                       gl1 = gh.split("|")[0];
                       gl2 = gh.split("|")[1];
